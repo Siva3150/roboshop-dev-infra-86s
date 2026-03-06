@@ -12,35 +12,35 @@ resource "aws_instance" "mongodb" {
   )
 }
 
-resource "terraform_data" "mongodb" {
-  triggers_replace = [
-    aws_instance.mongodb.id 
-  ]
+# resource "terraform_data" "mongodb" {
+#   triggers_replace = [
+#     aws_instance.mongodb.id 
+#   ]
 
-#connection block using to connect to server
-  connection {
-    type = "ssh"
-    user = "ec2-user"
-    password = "DevOps321"
-    host = aws_instance.mongodb.private_ip
-  }
+# #connection block using to connect to server
+#   connection {
+#     type = "ssh"
+#     user = "ec2-user"
+#     password = "DevOps321"
+#     host = aws_instance.mongodb.private_ip
+#   }
 
- # terraform copies this file to mongodb server
-  provisioner "file" {
+#  # terraform copies this file to mongodb server
+#   provisioner "file" {
     
-        source = "bootstrap.sh"
-        destination = "/tmp/bootstrap.sh" 
+#         source = "bootstrap.sh"
+#         destination = "/tmp/bootstrap.sh" 
      
-  }
+#   }
 
-  provisioner "remote-exec" {
-    inline = [ 
-        "chmod +x /tmp/bootstrap.sh",
-        #"sudo sh /tmp/bootstrap.sh"
-         "sudo sh /tmp/bootstrap.sh mongodb"
-     ]
+#   provisioner "remote-exec" {
+#     inline = [ 
+#         "chmod +x /tmp/bootstrap.sh",
+#         #"sudo sh /tmp/bootstrap.sh"
+#          "sudo sh /tmp/bootstrap.sh mongodb"
+#      ]
     
-  }
+#   }
 
 
-}
+# }
