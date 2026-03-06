@@ -3,7 +3,7 @@ variable "vpc_cidr" {
   
 }
 
-variable "project" {
+variable "project_name" {
     default = "roboshop"
   
 }
@@ -14,6 +14,16 @@ variable "environment" {
 }
 
 variable "vpc_tags" {
+    type = map 
+    default = {
+        Purpose = "vpc-module-test"
+        DontDelete = "true"
+    }
+  
+}
+
+variable "igw_tags" {
+    type = map 
     default = {
         Purpose = "vpc-module-test"
         DontDelete = "true"
@@ -31,8 +41,12 @@ variable "private_subnet_cidrs" {
   
 }
 
-variable "database_subnet_cidrs" {
+variable "databse_subnet_cidrs" {
     default = ["10.0.21.0/24","10.0.22.0/24"]
   
 }
 
+# variable "is_peering_required" {
+#     default = true
+  
+# }
