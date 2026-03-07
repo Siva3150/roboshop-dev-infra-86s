@@ -101,6 +101,7 @@ resource "aws_instance" "mysql" {
   instance_type = "t3.micro"
   vpc_security_group_ids = [local.mysql_sg_id]
   subnet_id = local.database_subent_ids
+  iam_instance_profile = aws_iam_instance_profile.mysql.name 
 
   tags = merge(
     local.common_tags,
@@ -109,6 +110,13 @@ resource "aws_instance" "mysql" {
     }
   )
 }
+
+
+resource "aws_iam_instance_profile" "mysql" {
+  name = "mysql"
+  role = "EC2SSMParameterRead"
+}
+
 resource "terraform_data" "mysql" {
   triggers_replace = [
     aws_instance.mysql.id 
@@ -134,7 +142,7 @@ resource "terraform_data" "mysql" {
     inline = [ 
         "chmod +x /tmp/bootstrap.sh",
         #"sudo sh /tmp/bootstrap.sh"
-         "sudo sh /tmp/bootstrap.sh mysql"
+         "sudo sh /tmp/bootstrap.sh mysql dev"
      ]
     
   }
