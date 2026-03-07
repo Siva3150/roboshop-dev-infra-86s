@@ -5,7 +5,7 @@ resource "aws_instance" "bastion" {
   subnet_id = local.public_subent_ids
 
   user_data = file("bastion.sh")
-
+  iam_instance_profile = aws_iam_instance_profile.bastion.name 
 
   tags = merge(
     local.common_tags,
@@ -15,3 +15,7 @@ resource "aws_instance" "bastion" {
   )
 }
 
+resource "aws_iam_instance_profile" "bastion" {
+  name = "Bastion"
+  role = "Bastion-Role"
+}

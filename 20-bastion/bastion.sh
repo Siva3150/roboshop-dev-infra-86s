@@ -11,3 +11,11 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashi
 sudo yum -y install terraform
 
 # sudo lvreduce -r -L 6G /dev/mapper/RootVG-rootVol
+
+creating databases
+cd /home/ec2-user
+git clone https://github.com/Siva3150/roboshop-dev-infra-86s.git
+chown ec2-user:ec2-user -R roboshop-dev-infra-86s
+cd roboshop-dev-infra/40-databases
+# terraform init
+# terraform apply -auto-approve
