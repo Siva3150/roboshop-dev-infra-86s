@@ -32,7 +32,7 @@ if [ -d $ANSIBLE_DIR ]; then
 
 else 
 
- git clone $REPO_DIR
+ git clone $REPO_URL
  cd $ANSIBLE_DIR
 fi 
 
