@@ -10,9 +10,7 @@
 #!/bin/bash 
 component=$1
 environment=$2
-
-
-# dnf install ansible -y 
+dnf install ansible -y 
 # ansible-pull -U https://github.com/Siva3150/ansible-roboshop-roles-tf-86s.git -e component=$component main.yaml
 
 REPO_URL=https://github.com/Siva3150/ansible-roboshop-roles-tf-86s.git
