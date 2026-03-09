@@ -89,6 +89,7 @@ resource "aws_lb_target_group" "catalogue" {
   }
 }
 
+#Launch template
 resource "aws_launch_template" "catalogue" {
   name = "${local.common_name_suffix}-catalogue"
   image_id = aws_ami_from_instance.catalogue.id
@@ -133,4 +134,35 @@ resource "aws_launch_template" "catalogue" {
       }
   )
 
+}
+
+#ASG target 
+resource "aws_autoscaling_policy" "catalogue" {
+  autoscaling_group_name = aws_autoscaling_group.catalogue.name
+  name                   = "${local.common_name_suffix}-catalogue"
+  policy_type            = "TargetTrackingScaling"
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    target_value = 75.0
+  }
+}
+
+resource "aws_lb_listener_rule" "catalogue" {
+  listener_arn = local.backend_alb_listener_arn
+  priority     = 10
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.catalogue.arn
+  }
+
+  condition {
+    host_header {
+      values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"]
+    }
+  }
 }
