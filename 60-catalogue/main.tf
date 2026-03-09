@@ -29,7 +29,7 @@ resource "terraform_data" "catalogue" {
  # terraform copies this file to mongodb server
   provisioner "file" {
     
-        source = "bootstrap.sh"
+        source = "catalogue.sh"
         destination = "/tmp/catalogue.sh" 
      
   }
@@ -37,7 +37,7 @@ resource "terraform_data" "catalogue" {
   provisioner "remote-exec" {
     inline = [ 
         "chmod +x /tmp/catalogue.sh",
-        #"sudo sh /tmp/bootstrap.sh"
+        #"sudo sh /tmp/catalogue.sh"
          "sudo sh /tmp/catalogue.sh catalogue ${var.environment}"
      ]
     
