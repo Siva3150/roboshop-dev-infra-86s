@@ -45,3 +45,26 @@ resource "terraform_data" "catalogue" {
 
 
 }
+
+#Stop the catalogue instance
+# resource "aws_ec2_instance_state" "catalogue" {
+#   instance_id = aws_instance.bastion.id
+#   state       = "stopped" # The desired state for the instance
+#   depends_on = [ terraform_data.catalogue ]
+# }
+
+# Create the AMI from the catalogue instance
+# resource "aws_ami_from_instance" "catalogue" {
+#   name               =  "${local.common_name_suffix}-catalogue-ami"
+#   source_instance_id = aws_instance.catalogue.id 
+#   depends_on = [ aws_ec2_instance_state.catalogue ]
+#   # Optional: add a description
+#   description        = "AMI created from an existing instance via Terraform"
+
+#     tags = merge (
+#         local.common_tags,
+#         {
+#             Name = "${local.common_name_suffix}-catalogue-ami" # roboshop-dev-mongodb
+#         }
+#   )
+# }
