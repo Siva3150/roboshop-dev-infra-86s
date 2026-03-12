@@ -136,7 +136,7 @@ resource "aws_launch_template" "catalogue" {
 
 }
 
-#ASG group
+#ASG group 
 resource "aws_autoscaling_group" "catalogue" {
   name                      = "${local.common_name_suffix}-catalogue"
   max_size                  = 10
