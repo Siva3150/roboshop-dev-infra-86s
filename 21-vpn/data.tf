@@ -1,23 +1,21 @@
 data "aws_ami" "openvpn" {
-    owners           = ["973714476881"]
-    most_recent      = true
+  owners      = ["973714476881"]
+  most_recent = true
 
-    filter {
-        name = "name"
-        values = ["OpenVPN Access Server Community Image-3b5882c4-*"]
-    }
+  filter {
+    name   = "name"
+    values = ["OpenVPN Access Server Community Image-*"]
+  }
 
-     filter {
-        name = "root-device-type"
-        values = ["ebs"]
-    }
-    
-        filter {
-        name = "virtualization-type"
-        values = ["hvm"]
-    }
-    
-    
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 }
 
 data "aws_ssm_parameter" "bastion_sg_id" {
