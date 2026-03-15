@@ -17,6 +17,6 @@ cd /home/ec2-user
 git clone https://github.com/Siva3150/roboshop-dev-infra-86s.git
 chown ec2-user:ec2-user -R roboshop-dev-infra-86s
 cd roboshop-dev-infra-86s/40-databases
-terraform init
+terraform init -upgrade
 terraform apply -auto-approve    
 
